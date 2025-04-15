@@ -1,0 +1,16 @@
+package aelsi2.logisim_time
+
+import com.cburch.logisim.tools.AddTool
+import com.cburch.logisim.tools.Library
+import com.cburch.logisim.tools.Tool
+
+@Suppress("UNUSED")
+class TimeLibrary : Library() {
+    override fun getTools(): MutableList<out Tool> {
+        return mutableListOf(AddTool(StableClockComponent()))
+    }
+
+    override fun getDisplayName(): String {
+        return TimeStrings.get(TimeStrings.LIBRARY_NAME)
+    }
+}
