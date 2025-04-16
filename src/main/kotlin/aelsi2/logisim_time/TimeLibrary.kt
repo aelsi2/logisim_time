@@ -6,8 +6,10 @@ import com.cburch.logisim.tools.Tool
 
 @Suppress("UNUSED")
 class TimeLibrary : Library() {
+    private val _tools = mutableListOf(AddTool(StableClockComponent()))
+
     override fun getTools(): MutableList<out Tool> {
-        return mutableListOf(AddTool(StableClockComponent()))
+        return _tools
     }
 
     override fun getDisplayName(): String {
