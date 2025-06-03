@@ -1,10 +1,7 @@
 package aelsi2.logisim_time
 
-import com.cburch.logisim.util.LocaleListener
-import com.cburch.logisim.util.LocaleManager
 import com.cburch.logisim.util.StringGetter
-import java.util.Locale
-import java.util.ResourceBundle
+import java.util.*
 
 @Suppress("UNCHECKED_CAST")
 object TimeStrings {
@@ -16,20 +13,12 @@ object TimeStrings {
     const val PORT_TOOLTIP_OUTPUT = "port_tooltip_output"
     const val ATTRIBUTE_DELAY = "attribute_delay"
 
-    init {
-        // Pizdec
-        val field = LocaleManager::class.java.getDeclaredField("listeners")
-        field.isAccessible = true
-        val listeners = field.get(null) as ArrayList<LocaleListener>
-        listeners.add(0) {
-            bundle = loadBundle(LocaleManager.getLocale())
-        }
-    }
+    const val BUNDLE_NAME = "logisim_time"
 
-    private var bundle = loadBundle(LocaleManager.getLocale())
+    // getBundle caches resource bundles by default so this is fine
+    private val bundle
+        get() = ResourceBundle.getBundle(BUNDLE_NAME)
 
     fun getter(key: String): StringGetter = StringGetter { bundle.getString(key) }
     fun get(key: String): String = bundle.getString(key)
-
-    private fun loadBundle(locale: Locale): ResourceBundle = ResourceBundle.getBundle("logisim_time", locale)
 }
